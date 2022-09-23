@@ -7,27 +7,29 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 
-class PageAdapter : RecyclerView.Adapter<PageAdapter.PageViewHolder>() {
+class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageViewHolder>() {
 
-    inner class PageViewHolder(binding: UserListBinding): RecyclerView.ViewHolder(binding.root)
+    inner class PageViewHolder(val binding: UserListBinding): RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem._id == newItem._id
+    private val diffCallback = object : DiffUtil.ItemCallback<Item>() {
+
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem.user.name == newItem.user.name &&
+                    oldItem.score == newItem.score
         }
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem == newItem
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-    var users: List<User>
+    var items: List<Item>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
 
     override fun getItemCount(): Int {
-        return users.size
+        return items.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
@@ -40,10 +42,11 @@ class PageAdapter : RecyclerView.Adapter<PageAdapter.PageViewHolder>() {
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         holder.binding.apply {
-            val todo = todos[position]
-            tvTitle.text = todo.title
-            cbDone.isChecked = todo.completed
-        }
+            val item = items[position]
+            tvRank.text = position.toString()
+            //tvAvatar.text = item.user.avatar
+            tvName.text = item.user.name
+            tvPoints.text = item.score }
     }
 
 

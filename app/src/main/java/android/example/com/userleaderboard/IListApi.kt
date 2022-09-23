@@ -4,7 +4,7 @@ import retrofit2.http.GET
 
 interface IListApi {
 
-    @GET("/api/leaderboard/0")
-    suspend fun getUserList(): Response<List<User>>
+    @GET("api/leaderboard/0")
+    suspend fun getUserList(): Response<Page>
 
 }

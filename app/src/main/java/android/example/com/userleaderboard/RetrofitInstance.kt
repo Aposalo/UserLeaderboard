@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RetrofitInstance {
+object RetrofitInstance {
 
     val api: IListApi by lazy{
 
@@ -14,7 +14,7 @@ class RetrofitInstance {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://localhost:5002")
+            .baseUrl("http://192.168.50.16:5002/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient)
             .build()
