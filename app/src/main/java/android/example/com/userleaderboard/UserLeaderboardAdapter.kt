@@ -1,5 +1,6 @@
 package android.example.com.userleaderboard
 
+import android.example.com.userleaderboard.api.dataclass.Item
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.example.com.userleaderboard.databinding.UserListBinding
@@ -23,7 +24,8 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
+
+    val differ = AsyncListDiffer(this, diffCallback)
     var items: List<Item>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
@@ -43,7 +45,8 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         holder.binding.apply {
             val item = items[position]
-            tvRank.text = position.toString()
+            val rank = position + 1
+            tvRank.text = rank.toString()
             //tvAvatar.text = item.user.avatar
             tvName.text = item.user.name
             tvPoints.text = item.score }

@@ -1,4 +1,4 @@
-package android.example.com.userleaderboard
+package android.example.com.userleaderboard.api.dataclass
 
 data class User (
     val age: Int,

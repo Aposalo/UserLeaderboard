@@ -1,8 +1,8 @@
-package android.example.com.userleaderboard
+package android.example.com.userleaderboard.api.dataclass
 
 data class Page(
     val currentPage: Int,
-    val items: List<Item>,
+    val items: MutableList<Item>,
     val nextPage: Int,
     val previousPage: Any,
     val timeUntilReset: String,
