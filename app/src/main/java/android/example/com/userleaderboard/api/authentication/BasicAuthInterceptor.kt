@@ -1,4 +1,4 @@
-package android.example.com.userleaderboard
+package android.example.com.userleaderboard.api.authentication
 
 import okhttp3.Credentials
 import okhttp3.Interceptor
