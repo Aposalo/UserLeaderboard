@@ -1,16 +1,22 @@
 package android.example.com.userleaderboard
 
 import android.example.com.userleaderboard.api.dataclass.Item
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import android.example.com.userleaderboard.databinding.UserListBinding
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import kotlinx.android.synthetic.main.user_list.view.*
+
 
 class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageViewHolder>() {
 
-    inner class PageViewHolder(val binding: UserListBinding): RecyclerView.ViewHolder(binding.root)
+    inner class PageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     private val diffCallback = object : DiffUtil.ItemCallback<Item>() {
 
@@ -35,21 +41,36 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
-        return PageViewHolder(UserListBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ))
+        return PageViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.user_list,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
-        holder.binding.apply {
+        holder.itemView.apply {
             val item = items[position]
             val rank = position + 1
             tvRank.text = rank.toString()
-            //tvAvatar.text = item.user.avatar
+
+            val theImage = GlideUrl(
+                item.user.avatar, LazyHeaders.Builder()
+                    .addHeader("User-Agent", "5")
+                    .build()
+            )
+
+            Glide.with(this)
+                .load(theImage)
+                .circleCrop()
+                .into(tvAvatar)
+
+
             tvName.text = item.user.name
-            tvPoints.text = item.score }
+            //tvPoints.text = item.score }
+        }
     }
 
 

@@ -7,14 +7,14 @@ import okhttp3.Response
 
 class BasicAuthInterceptor : Interceptor {
 
-    private var credentials: String? = null
+    private var credentials: String
 
-    constructor(user: String?, password: String?) {
+    constructor(user: String, password: String) {
         credentials = Credentials.basic(user, password)
     }
 
-    override fun intercept(chain: Interceptor.Chain?): Response {
-        val request: Request = chain!!.request()
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request: Request = chain.request()
         val authenticatedRequest: Request = request.newBuilder()
             .header("Authorization", credentials).build()
         return chain.proceed(authenticatedRequest)

@@ -31,7 +31,7 @@ class UserLeaderboardModel(
     private fun handlePageResponse(response: Response<Page>) : Resource<Page> {
         if(response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                currentPageNumber = resultResponse.currentPage
+                currentPageNumber++
                 if(pageResponse == null) {
                     pageResponse = resultResponse
                 } else {

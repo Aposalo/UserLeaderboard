@@ -4,64 +4,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="75dp">
+    android:layout_height="50dp"
+    android:padding="8dp">
+
+
+    <!--        app:layout_constraintEnd_toStartOf="@+id/tvPoints"-->
 
     <TextView
         android:id="@+id/tvRank"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
+        android:text="RANK"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvName"
+        app:layout_constraintEnd_toStartOf="@+id/tvAvatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Placeholder" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvAvatar"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/tvName"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:text="Placeholder" />-->
+    <ImageView
+        android:id="@+id/tvAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvRank"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="360dp"
+        android:text="NAME"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvPoints"
-        app:layout_constraintStart_toStartOf="@+id/tvRank"
+        app:layout_constraintStart_toStartOf="@+id/tvAvatar"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521"
         tools:text="Placeholder" />
 
-    <TextView
-        android:id="@+id/tvPoints"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvName"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Placeholder" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvPoints"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="280dp"-->
+    <!--        android:textSize="20sp"-->
+    <!--        android:text="POINTS"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/tvName"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.478"-->
+    <!--        tools:text="Placeholder" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvStarIcon"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:text="Placeholder" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvStarIcon"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:text="Placeholder" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
