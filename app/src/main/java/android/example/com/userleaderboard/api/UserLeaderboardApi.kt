@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface UserLeaderboardApi {
 
     @GET("api/leaderboard")
-    suspend fun getUserPage(@Query("page") pageNumber: Int = 0): Response<Page>
+    suspend fun getUserLeaderboardPage(@Query("page") pageNumber: Int = 0): Response<Page>
 
 }

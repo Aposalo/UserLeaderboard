@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class UserLeaderboardModel(
-    val repository: UserLeaderboardRepository
+    private val repository: UserLeaderboardRepository
 ) : ViewModel() {
 
     val pageData: MutableLiveData<Resource<Page>> = MutableLiveData()
@@ -29,17 +29,19 @@ class UserLeaderboardModel(
 
 
     private fun handlePageResponse(response: Response<Page>) : Resource<Page> {
-        if(response.isSuccessful) {
+        if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                currentPageNumber = resultResponse.currentPage
-                if(pageResponse == null) {
-                    pageResponse = resultResponse
-                } else {
-                    val oldItems = pageResponse?.items
-                    val newItems = resultResponse.items
-                    oldItems?.addAll(newItems)
-                }
-                return Resource.Success(pageResponse ?: resultResponse)
+                currentPageNumber++
+//                if(pageResponse == null) {
+//                    pageResponse = resultResponse
+//                } else {
+//                    val oldItems = pageResponse?.items
+//                    val newItems = resultResponse.items
+//                    oldItems?.addAll(newItems)
+//                }
+//                return Resource.Success(pageResponse ?: resultResponse)
+                pageResponse = resultResponse
+                return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())

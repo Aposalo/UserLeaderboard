@@ -1,26 +1,25 @@
 package android.example.com.userleaderboard
 
-import android.example.com.userleaderboard.databinding.ActivityMainBinding
 import android.example.com.userleaderboard.model.UserLeaderboardModel
 import android.example.com.userleaderboard.repository.UserLeaderboardRepository
 import android.example.com.userleaderboard.util.Constants.Companion.QUERY_PAGE_SIZE
 import android.example.com.userleaderboard.util.Resource
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
     lateinit var viewModel: UserLeaderboardModel
+
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getUserPage()
                 isScrolling = false
             } else {
-                binding.rvUsers.setPadding(0, 0, 0, 0)
+                rvUsers.setPadding(0, 0, 0, 0)
             }
         }
 
@@ -58,12 +57,12 @@ class MainActivity : AppCompatActivity() {
     var isScrolling = false
 
     private fun hideProgressBar() {
-        binding.progressBar.visibility = View.INVISIBLE
+        progressBar.visibility = View.INVISIBLE
         isLoading = false
     }
 
     private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         isLoading = true
     }
 
@@ -71,8 +70,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val repository = UserLeaderboardRepository()
         viewModel = UserLeaderboardModel(repository)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
         setupRecyclerView()
 
         viewModel.pageData.observe(this, Observer { response ->
@@ -96,16 +94,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
 
+    }
 
     private fun setupRecyclerView() {
         userLeaderboardAdapter = UserLeaderboardAdapter()
-        binding.rvUsers.apply{
+        rvUsers.apply{
             adapter = userLeaderboardAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
             addOnScrollListener(this@MainActivity.scrollListener)
         }
     }
-
 }
