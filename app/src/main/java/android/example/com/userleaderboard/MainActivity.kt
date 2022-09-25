@@ -1,25 +1,28 @@
 package android.example.com.userleaderboard
 
+import android.content.res.Configuration
 import android.example.com.userleaderboard.model.UserLeaderboardModel
 import android.example.com.userleaderboard.repository.UserLeaderboardRepository
 import android.example.com.userleaderboard.util.Constants.Companion.QUERY_PAGE_SIZE
 import android.example.com.userleaderboard.util.Resource
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.user_list.*
+
 
 const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: UserLeaderboardModel
+
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
@@ -94,8 +97,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
 
+    }
 
     private fun setupRecyclerView() {
         userLeaderboardAdapter = UserLeaderboardAdapter()

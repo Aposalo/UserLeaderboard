@@ -32,14 +32,16 @@ class UserLeaderboardModel(
         if(response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 currentPageNumber++
-                if(pageResponse == null) {
-                    pageResponse = resultResponse
-                } else {
-                    val oldItems = pageResponse?.items
-                    val newItems = resultResponse.items
-                    oldItems?.addAll(newItems)
-                }
-                return Resource.Success(pageResponse ?: resultResponse)
+//                if(pageResponse == null) {
+//                    pageResponse = resultResponse
+//                } else {
+//                    val oldItems = pageResponse?.items
+//                    val newItems = resultResponse.items
+//                    oldItems?.addAll(newItems)
+//                }
+//                return Resource.Success(pageResponse ?: resultResponse)
+                pageResponse = resultResponse
+                return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())

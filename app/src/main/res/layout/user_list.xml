@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:padding="8dp">
+    android:layout_height="75dp"
+    android:paddingTop="1dp"
+    android:background="#000000">
 
-
-    <!--        app:layout_constraintEnd_toStartOf="@+id/tvPoints"-->
 
     <TextView
         android:id="@+id/tvRank"
-        android:layout_width="100dp"
-        android:layout_height="28dp"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#343434"
         android:text="RANK"
+        android:textColor="@color/white"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvAvatar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
         tools:text="Placeholder" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:background="#228B22"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/tvAvatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvName"
-        app:layout_constraintStart_toStartOf="@+id/tvRank"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="45dp"
+        android:background="#228B22"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="360dp"
+        android:layout_width="190dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="110dp"
         android:text="NAME"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvAvatar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:background="#228B22"
+        android:gravity="center"
         tools:text="Placeholder" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvPoints"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="280dp"-->
-    <!--        android:textSize="20sp"-->
-    <!--        android:text="POINTS"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/tvName"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.478"-->
-    <!--        tools:text="Placeholder" />-->
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="295dp"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:text="POINTS"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:background="#228B22"
+        tools:text="Placeholder" />
+
+    <ImageView
+        android:id="@+id/tvStarIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="#228B22"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="25dp"
+        android:scaleType="centerCrop"/>
 
     <!--    <TextView-->
     <!--        android:id="@+id/tvStarIcon"-->
@@ -71,4 +87,4 @@
     <!--        app:layout_constraintTop_toTopOf="parent"-->
     <!--        tools:text="Placeholder" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
