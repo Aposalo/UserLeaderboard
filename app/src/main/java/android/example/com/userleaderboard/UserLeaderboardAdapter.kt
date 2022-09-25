@@ -1,7 +1,7 @@
 package android.example.com.userleaderboard
 
 import android.example.com.userleaderboard.api.dataclass.Item
-import android.graphics.*
+import android.example.com.userleaderboard.util.BitmapExtension
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +12,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import kotlinx.android.synthetic.main.user_list.view.*
-import java.io.File
-import java.lang.Integer.min
 
 
 class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageViewHolder>() {
@@ -52,27 +50,6 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
         )
     }
 
-    private fun getCircularBitmap(srcBitmap: Bitmap?): Bitmap {
-        val squareBitmapWidth = min(srcBitmap!!.width, srcBitmap.height)
-        val dstBitmap = Bitmap.createBitmap(
-            squareBitmapWidth,
-            squareBitmapWidth,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(dstBitmap)
-        val paint = Paint()
-        paint.isAntiAlias = true
-        val rect = Rect(0, 0, squareBitmapWidth, squareBitmapWidth)
-        val rectF = RectF(rect)
-        canvas.drawOval(rectF, paint)
-        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-        val left = ((squareBitmapWidth - srcBitmap.width) / 2).toFloat()
-        val top = ((squareBitmapWidth - srcBitmap.height) / 2).toFloat()
-        canvas.drawBitmap(srcBitmap, left, top, paint)
-        srcBitmap.recycle()
-        return dstBitmap
-
-    }
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         holder.itemView.apply {
@@ -93,11 +70,9 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
 
             tvName.text = item.user.name
             tvPoints.text = item.score
-            val bitmapResourceID: Int = R.drawable.star_icon_leaderboard
-            var bitmap = BitmapFactory.decodeResource(resources, bitmapResourceID)
-            val circularBitmap = getCircularBitmap(bitmap)
-            tvStarIcon.setImageBitmap(circularBitmap)
-            //tvStarIcon.setImageResource(R.drawable.star_icon_leaderboard)
+            tvStarIcon.setImageBitmap(BitmapExtension.getImageBitmap(
+                R.drawable.star_icon_leaderboard,
+                resources))
         }
     }
 }

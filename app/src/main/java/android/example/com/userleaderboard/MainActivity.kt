@@ -1,6 +1,5 @@
 package android.example.com.userleaderboard
 
-import android.content.res.Configuration
 import android.example.com.userleaderboard.model.UserLeaderboardModel
 import android.example.com.userleaderboard.repository.UserLeaderboardRepository
 import android.example.com.userleaderboard.util.Constants.Companion.QUERY_PAGE_SIZE
@@ -14,8 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.user_list.*
-
 
 const val TAG = "MainActivity"
 
@@ -108,5 +105,4 @@ class MainActivity : AppCompatActivity() {
             addOnScrollListener(this@MainActivity.scrollListener)
         }
     }
-
 }
