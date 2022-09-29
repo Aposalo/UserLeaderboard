@@ -1,6 +1,6 @@
 package android.example.com.userleaderboard
 
-import android.example.com.userleaderboard.api.dataclass.Item
+import android.example.com.userleaderboard.model.ItemModel
 import android.example.com.userleaderboard.util.BitmapExtension
 import android.view.LayoutInflater
 import android.view.View
@@ -18,26 +18,26 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
 
     inner class PageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Item>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<ItemModel>() {
 
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.user.name == newItem.user.name &&
-                    oldItem.score == newItem.score
+        override fun areItemsTheSame(oldItem: ItemModel, newItem: ItemModel): Boolean {
+            return oldItem.name == newItem.name &&
+                    oldItem.score == newItem.score &&
+                    oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+        override fun areContentsTheSame(oldItem: ItemModel, newItem: ItemModel): Boolean {
             return oldItem == newItem
         }
     }
 
-
     val differ = AsyncListDiffer(this, diffCallback)
-    var items: List<Item>
+    var itemModels: List<ItemModel>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
 
     override fun getItemCount(): Int {
-        return items.size
+        return itemModels.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
@@ -53,12 +53,11 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         holder.itemView.apply {
-            val item = items[position]
-            val rank = position + 1
-            tvRank.text = rank.toString()
+            val itemModel = itemModels[position]
+            tvRank.text = itemModel.id.toString()
 
             val avatar = GlideUrl (
-                item.user.avatar, LazyHeaders.Builder()
+                itemModel.avatar, LazyHeaders.Builder()
                     .addHeader("User-Agent", "5")
                     .build()
             )
@@ -68,8 +67,8 @@ class UserLeaderboardAdapter : RecyclerView.Adapter<UserLeaderboardAdapter.PageV
                 .circleCrop()
                 .into(tvAvatar)
 
-            tvName.text = item.user.name
-            tvPoints.text = item.score
+            tvName.text = itemModel.name
+            tvPoints.text = itemModel.score
             tvStarIcon.setImageBitmap(BitmapExtension.getImageBitmap(
                 R.drawable.star_icon_leaderboard,
                 resources))

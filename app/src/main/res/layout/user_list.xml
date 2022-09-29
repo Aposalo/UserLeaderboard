@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="75dp"
-    android:paddingTop="1dp"
-    android:background="#000000">
+    android:paddingTop="0.5dp"
+    android:background="@color/userListLayout">
 
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:background="#343434"
+        android:background="@color/userListRank"
         android:text="RANK"
         android:textColor="@color/white"
         android:textAlignment="center"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
-        android:background="#228B22"
+        android:background="@color/userList"
         android:scaleType="centerCrop" />
 
     <ImageView
@@ -35,7 +35,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="45dp"
-        android:background="#228B22"
+        android:layout_marginTop="5dp"
         android:scaleType="centerCrop" />
 
     <TextView
@@ -47,10 +47,8 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:background="#228B22"
         android:gravity="center"
         tools:text="Placeholder" />
-
 
     <TextView
         android:id="@+id/tvPoints"
@@ -64,27 +62,14 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:gravity="center"
-        android:background="#228B22"
         tools:text="Placeholder" />
 
     <ImageView
         android:id="@+id/tvStarIcon"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:background="#228B22"
         android:layout_marginStart="340dp"
         android:layout_marginTop="25dp"
         android:scaleType="centerCrop"/>
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvStarIcon"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:textSize="20sp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:text="Placeholder" />-->
 
 </RelativeLayout>

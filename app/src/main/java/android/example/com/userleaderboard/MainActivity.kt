@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,7 +17,13 @@ const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel: UserLeaderboardModel
+    private lateinit var viewModel: UserLeaderboardModel
+
+    private lateinit var userLeaderboardAdapter : UserLeaderboardAdapter
+
+    var isLoading = false
+    var isLastPage = false
+    var isScrolling = false
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -34,10 +39,11 @@ class MainActivity : AppCompatActivity() {
             val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
             val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
                    isTotalMoreThanVisible && isScrolling
-            if(shouldPaginate) {
+            if (shouldPaginate) {
                 viewModel.getUserPage()
                 isScrolling = false
-            } else {
+            }
+            else {
                 rvUsers.setPadding(0, 0, 0, 0)
             }
         }
@@ -49,12 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private lateinit var userLeaderboardAdapter : UserLeaderboardAdapter
-
-    var isLoading = false
-    var isLastPage = false
-    var isScrolling = false
 
     private fun hideProgressBar() {
         progressBar.visibility = View.INVISIBLE
@@ -73,14 +73,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupRecyclerView()
 
-        viewModel.pageData.observe(this, Observer { response ->
-            when(response) {
+        viewModel.pageData.observe(this) { response ->
+            when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
-                        userLeaderboardAdapter.differ.submitList(newsResponse.items.toList())
-                        val totalPages = newsResponse.totalItems / QUERY_PAGE_SIZE + 2
-                        isLastPage = viewModel.currentPageNumber == totalPages
+                        userLeaderboardAdapter.differ.submitList(viewModel.getItemModels())
+                        isLastPage = viewModel.currentPageNumber == newsResponse.totalPages
                     }
                 }
                 is Resource.Error -> {
@@ -93,8 +92,7 @@ class MainActivity : AppCompatActivity() {
                     showProgressBar()
                 }
             }
-        })
-
+        }
     }
 
     private fun setupRecyclerView() {
