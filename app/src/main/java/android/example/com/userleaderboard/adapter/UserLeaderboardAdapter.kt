@@ -1,5 +1,6 @@
-package android.example.com.userleaderboard
+package android.example.com.userleaderboard.adapter
 
+import android.example.com.userleaderboard.R
 import android.example.com.userleaderboard.model.ItemModel
 import android.example.com.userleaderboard.util.BitmapExtension
 import android.view.LayoutInflater

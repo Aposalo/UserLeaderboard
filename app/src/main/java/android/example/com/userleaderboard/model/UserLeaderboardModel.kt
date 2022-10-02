@@ -25,19 +25,17 @@ class UserLeaderboardModel(
     fun getItemModels() : MutableList<ItemModel> {
         val itemsModel = ArrayList<ItemModel>(Constants.QUERY_PAGE_SIZE)
         var i = 0
-        var count = 1
         val totalCount = Constants.QUERY_PAGE_SIZE - 1
         for (i in (0..totalCount))
         {
             val itemModel = ItemModel (
-                count,
+                i + 1,
                 pageResponse?.items!![i].user.avatar,
                 pageResponse?.items!![i].user.name,
                 pageResponse?.items!![i].score
             )
 
             itemsModel.add(itemModel)
-            count++
         }
         return itemsModel
     }

@@ -1,5 +1,7 @@
 package android.example.com.userleaderboard
 
+import android.example.com.userleaderboard.R
+import android.example.com.userleaderboard.adapter.UserLeaderboardAdapter
 import android.example.com.userleaderboard.model.UserLeaderboardModel
 import android.example.com.userleaderboard.repository.UserLeaderboardRepository
 import android.example.com.userleaderboard.util.Constants.Companion.QUERY_PAGE_SIZE
