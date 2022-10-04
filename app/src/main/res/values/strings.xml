@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">UserLeaderboard</string>
+    <string name="app_name">User Leaderboard</string>
+    <string name="title_name">Leaderboard</string>
 </resources>
