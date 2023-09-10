@@ -1,13 +1,12 @@
 package android.example.com.userleaderboard.api.authentication
 
 import android.example.com.userleaderboard.api.UserLeaderboardApi
-import android.example.com.userleaderboard.util.Constants.Companion.CLIENT_BASE_URL
-import android.example.com.userleaderboard.util.Constants.Companion.CLIENT_PASSWORD
-import android.example.com.userleaderboard.util.Constants.Companion.CLIENT_USER
+import android.example.com.userleaderboard.util.Constants.CLIENT_BASE_URL
+import android.example.com.userleaderboard.util.Constants.CLIENT_PASSWORD
+import android.example.com.userleaderboard.util.Constants.CLIENT_USER
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 object RetrofitInstance {
 

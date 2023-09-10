@@ -1,9 +1,9 @@
 package android.example.com.userleaderboard.model
 
-import android.example.com.userleaderboard.util.Resource
 import android.example.com.userleaderboard.api.dataclass.Page
 import android.example.com.userleaderboard.repository.UserLeaderboardRepository
 import android.example.com.userleaderboard.util.Constants
+import android.example.com.userleaderboard.util.Resource
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,26 +16,27 @@ class UserLeaderboardModel(
 
     val pageData: MutableLiveData<Resource<Page>> = MutableLiveData()
     var currentPageNumber = 0
-    var pageResponse: Page? = null
-
+    private lateinit var pageResponse: Page
     init {
         getUserPage()
     }
 
     fun getItemModels() : MutableList<ItemModel> {
         val itemsModel = ArrayList<ItemModel>(Constants.QUERY_PAGE_SIZE)
-        var i = 0
         val totalCount = Constants.QUERY_PAGE_SIZE - 1
-        for (i in (0..totalCount))
+        for (i in 0..totalCount)
         {
-            val itemModel = ItemModel (
-                i + 1,
-                pageResponse?.items!![i].user.avatar,
-                pageResponse?.items!![i].user.name,
-                pageResponse?.items!![i].score
-            )
-
-            itemsModel.add(itemModel)
+            pageResponse.apply {
+                items[i].apply {
+                    val itemModel = ItemModel (
+                        i + 1,
+                        user.avatar,
+                        user.name,
+                        score
+                    )
+                    itemsModel.add(itemModel)
+                }
+            }
         }
         return itemsModel
     }
@@ -50,14 +51,6 @@ class UserLeaderboardModel(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 currentPageNumber++
-//                if(pageResponse == null) {
-//                    pageResponse = resultResponse
-//                } else {
-//                    val oldItems = pageResponse?.items
-//                    val newItems = resultResponse.items
-//                    oldItems?.addAll(newItems)
-//                }
-//                return Resource.Success(pageResponse ?: resultResponse)
                 pageResponse = resultResponse
                 return Resource.Success(resultResponse)
             }

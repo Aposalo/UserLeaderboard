@@ -1,14 +1,19 @@
 package android.example.com.userleaderboard.util
 
 import android.content.res.Resources
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
+import android.graphics.RectF
 
-class BitmapExtension {
+object BitmapExtension {
 
-    companion object
-    {
-        private fun getCircularBitmap(srcBitmap: Bitmap?): Bitmap {
-            val squareBitmapWidth = Integer.min(srcBitmap!!.width, srcBitmap.height)
+        private fun getCircularBitmap(srcBitmap: Bitmap): Bitmap {
+            val squareBitmapWidth = Integer.min(srcBitmap.width, srcBitmap.height)
             val dstBitmap = Bitmap.createBitmap(
                 squareBitmapWidth,
                 squareBitmapWidth,
@@ -26,15 +31,10 @@ class BitmapExtension {
             canvas.drawBitmap(srcBitmap, left, top, paint)
             srcBitmap.recycle()
             return dstBitmap
-
         }
 
         fun getImageBitmap(id: Int, resources: Resources): Bitmap {
             val bitmap = BitmapFactory.decodeResource(resources, id)
             return getCircularBitmap(bitmap)
         }
-    }
-
-
-
 }
